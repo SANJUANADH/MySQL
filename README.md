@@ -275,7 +275,45 @@
 - []()
 ```SQL
 ``` 
-
+## Alternative Queries
+- [Draw The Triangle 1](https://www.hackerrank.com/challenges/draw-the-triangle-1)
+```SQL
+    DECLARE @i INT = 20
+    WHILE (@i > 0) 
+    BEGIN
+    PRINT REPLICATE('* ', @i) 
+    SET @i = @i - 1
+    END
+```
+- [Draw The Triangle 2](https://www.hackerrank.com/challenges/draw-the-triangle-2)
+```SQL
+    DECLARE @i INT = 1
+    WHILE (@i < 21) 
+    BEGIN
+    PRINT REPLICATE('* ', @i) 
+    SET @i = @i + 1
+    END
+```
+- [Print Prime Numbers](https://www.hackerrank.com/challenges/print-prime-numbers)
+```SQL
+    SELECT GROUP_CONCAT(NUMB SEPARATOR '&')
+    FROM (
+        SELECT @num:=@num+1 as NUMB FROM
+        information_schema.tables t1,
+        information_schema.tables t2,
+        (SELECT @num:=1) tmp
+    ) tempNum
+    WHERE NUMB<=1000 AND NOT EXISTS(
+        SELECT * FROM (
+            SELECT @nu:=@nu+1 as NUMA FROM
+                information_schema.tables t1,
+                information_schema.tables t2,
+                (SELECT @nu:=1) tmp1
+                LIMIT 1000
+            ) tatata
+        WHERE FLOOR(NUMB/NUMA)=(NUMB/NUMA) AND NUMA<NUMB AND NUMA>1
+    )
+    ```
 
 
 
