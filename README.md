@@ -220,77 +220,7 @@
     having total_score > 0
     order by total_score desc, h.hacker_id;
 ```
-## Advanced Join
-- [15 Days of Learning SQL](https://www.hackerrank.com/challenges/15-days-of-learning-sql/problem)
-```SQL
-    select 
-    submission_date ,
-    ( SELECT COUNT(distinct hacker_id)  
-    FROM Submissions s2  
-    WHERE s2.submission_date = s1.submission_date AND    (SELECT COUNT(distinct s3.submission_date) FROM      Submissions s3 WHERE s3.hacker_id = s2.hacker_id AND s3.submission_date < s1.submission_date) = dateDIFF(s1.submission_date , '2016-03-01')) ,
-    (select hacker_id  from submissions s2 where s2.submission_date = s1.submission_date 
-    group by hacker_id order by count(submission_id) desc , hacker_id limit 1) as shit,
-    (select name from hackers where hacker_id = shit)
-    from 
-    (select distinct submission_date from submissions) s1
-    group by submission_date
-```
-- [SQL Project Planning](https://www.hackerrank.com/challenges/sql-projects/problem)
-```SQL
-  SET sql_mode = '';
-    SELECT Start_Date, End_Date
-    FROM 
-        (SELECT Start_Date FROM Projects WHERE Start_Date NOT IN (SELECT End_Date FROM Projects)) a,
-        (SELECT End_Date FROM Projects WHERE End_Date NOT IN (SELECT Start_Date FROM Projects)) b 
-    WHERE Start_Date < End_Date
-    GROUP BY Start_Date 
-    ORDER BY DATEDIFF(End_Date, Start_Date), Start_Date
-```
-- []()
-```SQL
-```
-- []()
-```SQL
-``` 
-## Alternative Queries
-- [Draw The Triangle 1](https://www.hackerrank.com/challenges/draw-the-triangle-1)
-```SQL
-    DECLARE @i INT = 20
-    WHILE (@i > 0) 
-    BEGIN
-    PRINT REPLICATE('* ', @i) 
-    SET @i = @i - 1
-    END
-```
-- [Draw The Triangle 2](https://www.hackerrank.com/challenges/draw-the-triangle-2)
-```SQL
-    DECLARE @i INT = 1
-    WHILE (@i < 21) 
-    BEGIN
-    PRINT REPLICATE('* ', @i) 
-    SET @i = @i + 1
-    END
-```
-- [Print Prime Numbers](https://www.hackerrank.com/challenges/print-prime-numbers)
-```SQL
-    SELECT GROUP_CONCAT(NUMB SEPARATOR '&')
-    FROM (
-        SELECT @num:=@num+1 as NUMB FROM
-        information_schema.tables t1,
-        information_schema.tables t2,
-        (SELECT @num:=1) tmp
-    ) tempNum
-    WHERE NUMB<=1000 AND NOT EXISTS(
-        SELECT * FROM (
-            SELECT @nu:=@nu+1 as NUMA FROM
-                information_schema.tables t1,
-                information_schema.tables t2,
-                (SELECT @nu:=1) tmp1
-                LIMIT 1000
-            ) tatata
-        WHERE FLOOR(NUMB/NUMA)=(NUMB/NUMA) AND NUMA<NUMB AND NUMA>1
-    )
-    ```
+
 
 
 
